@@ -1,0 +1,370 @@
+<!DOCTYPE html>
+<html>
+   <head>
+      <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+      <title>Hero Zero</title>
+      <link href="https://hz-static-landing.akamaized.net/css/compressed/main.css" rel="stylesheet">
+      <link href="https://hz-static-landing.akamaized.net/css/main_new.css" rel="stylesheet">
+      <style>
+         /* Estilos Globais */
+         html, body {
+            height: 100%;
+            margin: 0;
+            overflow: hidden; /* Remove a barra de rolagem */
+            background: none;
+         }
+
+         html {
+            background: #0D2447;
+         }
+
+         /* Fontes */
+         @font-face {
+            font-family: GROBOLD;
+            src: url('https://hz-static-landing.akamaized.net/css/GROBOLD.ttf');
+         }
+
+         /* Layout Principal */
+         .main-container {
+            background:url(/images/main-container-background_newCharacterNoLogo.jpg) center top no-repeat;
+            height: 100%; /* Garante que o contêiner principal ocupe toda a altura da tela */
+         }
+
+         .video-background {
+            transform: translateX(-50%);
+            left: 50%;
+            min-width: 100%;
+            min-height: 100%;
+            width: auto;
+            height: auto;
+            z-index: -100;
+            overflow: hidden;
+            position: fixed;
+         }
+
+         /* Estilos de Contêiner e Diálogo */
+         .dialog-container-wrapper {
+            background-color: rgba(0,0,0,0.8);
+            border-radius: 25px;
+            padding: 0;
+            user-select: none;
+         }
+
+         .dialog-container {
+            height: 282px;
+            width: 370px;
+            margin-top: 144px;
+            padding-left: 25%;
+         }
+
+         /* Estilos do Formulário de Registro */
+         .registration-container-logo {
+            margin-top: -100px;
+         }
+
+         .registration-text-caption {
+            font-family: GROBOLD;
+            color: #F7CC30;
+            font-size: 28px;
+            width: 300px;
+            text-align: center;
+            margin-left: 40px;
+            margin-top: -47px;
+            line-height: 42px;
+         }
+
+         .registration-text-input {
+            border-radius: 12px;
+            background-color: white;
+            color: #3b3a39;
+            padding: 0 12px;
+            font-size: 18px;
+            border: none;
+            width: 285px;
+            height: 40px;
+            outline: none;
+         }
+
+         .input-error {
+            color: #EE8884;
+            font-size: 13px;
+            display: none;
+            font-weight: bold;
+         }
+
+         /* Ícones */
+         .icon-none {
+            display: none;
+         }
+
+         .icon-check, .icon-loading {
+            width: 28px;
+            height: 28px;
+            position: absolute;
+            margin-top: -33px;
+            margin-left: 340px;
+         }
+
+         .icon-check {
+            background-image: url('https://hz-static-landing.akamaized.net//images/icon-check.png');
+         }
+
+         .icon-loading {
+            background-image: url('https://hz-static-landing.akamaized.net//images/ajax-loader.gif');
+            background-size: contain;
+         }
+
+         /* Botões de Gênero */
+         #button-gender-m, #button-gender-f {
+            width:64px;
+            height:67px;
+            display: block;
+            margin: auto;
+         }
+
+         #button-gender-m {
+            background:url(https://hz-static-landing.akamaized.net/images/button_gender_m.png) center top no-repeat;
+         }
+
+         #button-gender-f {
+            background:url(https://hz-static-landing.akamaized.net/images/button_gender_f.png) center top no-repeat;
+            opacity: 0.5;
+         }
+
+         #button-gender-m:hover, #button-gender-f:hover {
+            transform: scale(1.1);
+         }
+
+         /* Rodapé e Links */
+         .footer {
+            background-color: rgba(0,0,0,0.8);
+            padding: 5px;
+            width: 100%;
+            margin: 0;
+            text-align: center;
+            position: fixed;
+            bottom: 0;
+         }
+
+         .footer-icons {
+            margin-top: -21px;
+            background-image: url(/images/footer-icons-landingpage.png);
+            width: 199px;
+            height: 35px;
+         }
+
+         .footer-icon {
+            width: 35px;
+            height: 35px;
+         }
+
+         .footer-icon-twitter { left: 41px; }
+         .footer-icon-instagram { left: 82px; }
+         .footer-icon-tiktok { left: 123px; }
+         .footer-icon-youtube { left: 164px; }
+
+         a, a:visited, a:active, a:hover {
+            text-decoration: none;
+            color: #cccccc;
+         }
+
+         /* Botões de Download */
+         .download-button-ios, .download-button-android, .download-button-steam {
+            width: 112px;
+            height: 37px;
+            background-size: contain;
+         }
+
+         .download-button-ios {
+            background:url(/images/store_app.png) center top no-repeat;
+         }
+
+         .download-button-android {
+            background:url(/images/store_google.png) center top no-repeat;
+         }
+
+         .download-button-steam {
+            background:url(/images/store_steam.png) center top no-repeat;
+         }
+
+         /* Estilos de Interação e Animações */
+         .start-button {
+            width:335px;
+            height:186px;
+            background:url(https://hz-static-landing.akamaized.net/pt_BR/images/startbutton-off_new.png) center top no-repeat;
+            display:block;
+            margin:auto;
+         }
+
+         .start-button:hover  {
+            background:url(https://hz-static-landing.akamaized.net/pt_BR/images/startbutton-on_new.png) center top no-repeat;
+         }
+
+         #start-button {
+            display: none;
+         }
+
+         /* Bottom Container */
+         #bottom-container {
+            position: relative;
+            top: 29px;
+            user-select: none;
+         }
+
+         #bottom-container table {
+            width: 389px;
+         }
+
+         #bottom-container table td {
+            padding: 0;
+         }
+
+         /* Estilos de Vídeo */
+         #video-background-male {
+            visibility: visible;
+         }
+
+         #video-background-female {
+            visibility: hidden;
+         }
+
+         /* Esconder Campos de Input */
+         #input-email, #input-password {
+            display: none;
+         }
+         
+         /* Ajuste na Margem do Formulário */
+         .registration-container {
+            margin-top: 50px;
+         }
+
+         /* Responsividade para Telas Menores (Smartphones) */
+         @media (max-width: 768px) {
+            .main-container {
+               background-size: cover;
+            }
+
+            .dialog-container {
+               width: 90%;
+               margin-top: 10%;
+               padding-left: 10%;
+            }
+
+            .registration-text-caption {
+               font-size: 24px;
+               width: 80%;
+               margin-left: 10%;
+            }
+
+            .registration-text-input {
+               width: 80%;
+               font-size: 16px;
+            }
+
+            .footer {
+               font-size: 14px;
+            }
+
+            .footer-icons {
+               width: 100%;
+               height: auto;
+               margin-top: 5px;
+            }
+
+            .footer-icon {
+               width: 30px;
+               height: 30px;
+            }
+
+            #button-gender-m, #button-gender-f {
+               width: 50px;
+               height: 50px;
+            }
+
+            .download-button-ios, .download-button-android, .download-button-steam {
+               width: 80px;
+               height: 30px;
+            }
+
+            .start-button {
+               width: 280px;
+               height: 160px;
+            }
+
+            /* Ajuste do Tamanho do Vídeo em Telas Menores */
+            .video-background {
+               min-width: 100%;
+               min-height: 100%;
+               object-fit: cover;
+            }
+         }
+
+         /* Responsividade para Telas Muito Pequenas (Mobile) */
+         @media (max-width: 480px) {
+            .registration-text-caption {
+               font-size: 20px;
+               line-height: 30px;
+            }
+
+            .registration-text-input {
+               width: 90%;
+               font-size: 14px;
+               padding: 0 10px;
+            }
+
+            .footer {
+               font-size: 12px;
+            }
+
+            .footer-icon {
+               width: 25px;
+               height: 25px;
+            }
+
+            .download-button-ios, .download-button-android, .download-button-steam {
+               width: 70px;
+               height: 25px;
+            }
+         }
+
+      </style>
+   </head>
+   <body>
+      <video autoplay loop id="video-background-male" class="video-background" muted playsinline>
+         <source src="https://hz-static-landing.akamaized.net//images/landing_page_male.mp4" type="video/mp4">
+      </video>
+      <div class="main-container" id="main-container">
+         <br>
+         <div class="dialog-container" id="dialog-container">
+            <div class="dialog-container-wrapper" id="dialog-container-wrapper">
+               <div class="registration-container">
+                  <img class="registration-container-logo" src="https://hz-static-landing.akamaized.net//images/app_logo.png">
+                  <div class="registration-text-caption">Crie o seu herói!</div>
+                  <table style="width: 200px; margin: auto;">
+                     <tr>
+                        <td><a href="javascript:" onclick="switchGender('m');" id="button-gender-m" class="gender-button"></a></td>
+                        <td><a href="javascript:" onclick="switchGender('f');" id="button-gender-f" class="gender-button"></a></td>
+                     </tr>
+                  </table>
+                  <br />
+                  <input id="input-name" type="text" class="registration-text-input" placeholder="Nome do herói" />
+                  <div id="input-name-icon" class="icon-none"></div>
+                  <div id="input-name-error" class="input-error"></div>
+                  <br />
+                  <br />
+               </div>
+            </div>
+            <div id="bottom-container">
+               <div class="footer-icons">
+               </div>
+            </div>
+         </div>
+         <div class="footer">
+            <a href="" target="" title="Fórum">Fórum</a> |
+            <a href="" target="" title="Dados legais">Dados legais</a> |
+            <a href="" target="" title="Política de privacidade">Política de privacidade</a> |
+            <a href="" target="" title="Condições e termos de uso">Condições e termos de uso</a>
+         </div>
+      </div>
+   </body>
+</html>
